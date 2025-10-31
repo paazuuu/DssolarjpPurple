@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS company_info (
 
   -- 会社基本情報
   company_name text NOT NULL DEFAULT '東勝会社',
-  company_name_en text DEFAULT 'Tokatsu Co., Ltd.',
+  company_name_en text DEFAULT 'Dongsheng Co., Ltd.',
   company_name_zh text DEFAULT '东胜公司',
 
   ceo_name text DEFAULT '郭 祥',

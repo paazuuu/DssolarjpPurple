@@ -284,6 +284,23 @@ export const CompanyTab: React.FC = () => {
           </div>
         </div>
 
+        {/* ドメイン */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            {t('ウェブサイトドメイン', '网站域名')}
+          </label>
+          <input
+            type="text"
+            value={data.domain || ''}
+            onChange={(e) => handleChange('domain', e.target.value)}
+            placeholder="例: dssolarjp.com"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            {t('会社の公式ウェブサイトのドメイン名を入力してください（例: dssolarjp.com）', '请输入公司官方网站的域名（例如：dssolarjp.com）')}
+          </p>
+        </div>
+
         {/* 住所 */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>

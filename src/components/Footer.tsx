@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
         {/* コピーライト */}
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} {company?.company_name_en || 'Tokatsu Co., Ltd.'}. All Rights Reserved.
+            © {currentYear} {company?.company_name_en || 'Dongsheng Co., Ltd.'}. All Rights Reserved.
           </p>
         </div>
       </div>

@@ -40,6 +40,7 @@ export interface Database {
           sub_color: string
           ceo_message_ja: string | null
           ceo_message_zh: string | null
+          domain: string | null
           created_at: string
           updated_at: string
         }
@@ -70,6 +71,7 @@ export interface Database {
           sub_color?: string
           ceo_message_ja?: string | null
           ceo_message_zh?: string | null
+          domain?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -100,6 +102,7 @@ export interface Database {
           sub_color?: string
           ceo_message_ja?: string | null
           ceo_message_zh?: string | null
+          domain?: string | null
           created_at?: string
           updated_at?: string
         }
