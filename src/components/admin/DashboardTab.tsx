@@ -170,9 +170,9 @@ export const DashboardTab: React.FC = () => {
       {/* 概要カード */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* クイックアクション */}
-        <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl shadow-md p-6 border border-orange-100">
+        <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl shadow-md p-6 border border-indigo-100">
           <div className="flex items-center space-x-3 mb-4">
-            <TrendingUp className="w-6 h-6 text-orange-600" />
+            <TrendingUp className="w-6 h-6 text-indigo-600" />
             <h3 className="text-xl font-bold text-gray-900">
               {t('クイックアクション', '快速操作')}
             </h3>
@@ -183,19 +183,19 @@ export const DashboardTab: React.FC = () => {
             </p>
             <ul className="space-y-2 text-sm text-gray-600">
               <li className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
                 <span>{t('会社情報: 基本情報とカラーテーマを設定', '公司信息：设置基本信息和颜色主题')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
                 <span>{t('サービス: 提供サービスの追加・編集', '服务：添加・编辑提供的服务')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
                 <span>{t('ブログ: ニュースや施工事例を投稿', '博客：发布新闻和施工案例')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
                 <span>{t('FAQ: よくある質問を管理', '常见问题：管理常见问题')}</span>
               </li>
             </ul>

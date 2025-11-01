@@ -90,9 +90,9 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* 住所 */}
-              <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-gradient-to-br from-violet-50 to-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-md">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center shadow-md">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div className="ml-4 flex-1">

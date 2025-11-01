@@ -56,9 +56,9 @@ export const About: React.FC = () => {
             <p className="text-gray-700">{company?.ceo_name}</p>
           </div>
 
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+          <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
             <div className="flex items-center mb-3">
-              <Calendar className="w-6 h-6 text-orange-600 mr-2" />
+              <Calendar className="w-6 h-6 text-cyan-600 mr-2" />
               <h3 className="font-bold text-gray-900">{t('創業', '创业')}</h3>
             </div>
             <p className="text-gray-700">
@@ -77,7 +77,7 @@ export const About: React.FC = () => {
 
         {/* 代表メッセージ */}
         {company?.ceo_message_ja && (
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 md:p-12 rounded-2xl shadow-lg">
+          <div className="bg-gradient-to-br from-violet-50 to-purple-50 p-8 md:p-12 rounded-2xl shadow-lg">
             <div className="max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 {t('代表からのメッセージ', '董事长致辞')}

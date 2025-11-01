@@ -70,7 +70,7 @@ export const FAQ: React.FC = () => {
                 </button>
 
                 {openIndex === index && (
-                  <div className="px-6 pb-6 pt-2 bg-gradient-to-br from-amber-50 to-orange-50">
+                  <div className="px-6 pb-6 pt-2 bg-gradient-to-br from-indigo-50 to-blue-50">
                     <div className="flex items-start">
                       <span className="inline-block bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">
                         A

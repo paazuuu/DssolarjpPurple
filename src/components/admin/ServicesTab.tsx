@@ -237,7 +237,7 @@ export const ServicesTab: React.FC = () => {
                         </button>
                         <button
                           onClick={() => handleEdit(service)}
-                          className="p-2 text-primary hover:bg-orange-50 rounded transition-colors"
+                          className="p-2 text-primary hover:bg-indigo-50 rounded transition-colors"
                           title={t('編集', '编辑')}
                         >
                           <Edit2 size={20} />

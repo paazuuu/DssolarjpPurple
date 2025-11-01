@@ -24,8 +24,8 @@ export const Flow: React.FC = () => {
       icon: Calendar,
       title: { ja: '作業日程のご案内', zh: '工作日程通知' },
       description: { ja: 'ご都合に合わせて調整', zh: '根据您的方便安排' },
-      color: 'from-orange-500 to-amber-500',
-      bgColor: 'from-orange-50 to-amber-50',
+      color: 'from-violet-500 to-purple-500',
+      bgColor: 'from-violet-50 to-purple-50',
     },
     {
       icon: Wrench,
@@ -64,7 +64,7 @@ export const Flow: React.FC = () => {
         <div className="max-w-5xl mx-auto">
           <div className="relative">
             {/* 接続線（デスクトップのみ） */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-green-200 via-orange-200 via-purple-200 to-red-200 transform -translate-y-1/2 z-0"></div>
+            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-green-200 via-violet-200 via-purple-200 to-pink-200 transform -translate-y-1/2 z-0"></div>
 
             {/* ステップカード */}
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">

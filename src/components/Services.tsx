@@ -44,16 +44,16 @@ export const Services: React.FC = () => {
               : Icons.Star;
 
             const colors = [
-              'from-blue-500 to-cyan-500',
-              'from-green-500 to-emerald-500',
-              'from-orange-500 to-amber-500',
+              'from-indigo-500 to-blue-500',
               'from-purple-500 to-pink-500',
+              'from-cyan-500 to-teal-500',
+              'from-violet-500 to-fuchsia-500',
             ];
             const bgColors = [
-              'from-blue-50 to-cyan-50',
-              'from-green-50 to-emerald-50',
-              'from-orange-50 to-amber-50',
+              'from-indigo-50 to-blue-50',
               'from-purple-50 to-pink-50',
+              'from-cyan-50 to-teal-50',
+              'from-violet-50 to-fuchsia-50',
             ];
 
             return (

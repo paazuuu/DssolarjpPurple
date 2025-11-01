@@ -11,8 +11,8 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = 'tokatsu-theme';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mainColor, setMainColor] = useState<string>('#f59e0b');
-  const [subColor, setSubColor] = useState<string>('#0ea5e9');
+  const [mainColor, setMainColor] = useState<string>('#6366f1');
+  const [subColor, setSubColor] = useState<string>('#8b5cf6');
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);

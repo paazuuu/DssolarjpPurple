@@ -6,10 +6,10 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #f59e0b;
-  --color-primary-dark: #d97706;
-  --color-primary-light: #fbbf24;
-  --color-sub: #0ea5e9;
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-light: #818cf8;
+  --color-sub: #8b5cf6;
 }
 
 * {
