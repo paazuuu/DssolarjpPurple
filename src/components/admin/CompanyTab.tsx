@@ -604,7 +604,7 @@ export const CompanyTab: React.FC = () => {
           </div>
           
           <div className="bg-gray-50 rounded-lg p-6 space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
                   {t('メインカラー', '主色')}
@@ -656,6 +656,32 @@ export const CompanyTab: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  {t('ヒーロー背景色', '英雄背景色')}
+                </label>
+                <div className="flex items-center space-x-4">
+                  <input
+                    type="color"
+                    value={data.hero_bg_color || '#8b5cf6'}
+                    onChange={(e) => handleChange('hero_bg_color', e.target.value)}
+                    className="w-20 h-20 border-2 border-gray-300 rounded-lg cursor-pointer"
+                  />
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      value={data.hero_bg_color || '#8b5cf6'}
+                      onChange={(e) => handleChange('hero_bg_color', e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary font-mono text-sm"
+                      placeholder="#8b5cf6"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      {t('トップページのヒーロー背景に使用', '用于首页英雄背景')}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* カラープリセット */}
@@ -665,10 +691,10 @@ export const CompanyTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
-                  { name: t('太陽光オレンジ', '太阳能橙'), main: '#f59e0b', sub: '#0ea5e9' },
-                  { name: t('エコグリーン', '生态绿'), main: '#10b981', sub: '#3b82f6' },
-                  { name: t('プロフェッショナルブルー', '专业蓝'), main: '#0ea5e9', sub: '#8b5cf6' },
-                  { name: t('エレガントパープル', '优雅紫'), main: '#8b5cf6', sub: '#ec4899' },
+                  { name: t('太陽光オレンジ', '太阳能橙'), main: '#f59e0b', sub: '#0ea5e9', hero: '#f59e0b' },
+                  { name: t('エコグリーン', '生态绿'), main: '#10b981', sub: '#3b82f6', hero: '#10b981' },
+                  { name: t('プロフェッショナルブルー', '专业蓝'), main: '#0ea5e9', sub: '#8b5cf6', hero: '#0ea5e9' },
+                  { name: t('エレガントパープル', '优雅紫'), main: '#8b5cf6', sub: '#ec4899', hero: '#8b5cf6' },
                 ].map((preset) => (
                   <button
                     key={preset.name}
@@ -676,17 +702,25 @@ export const CompanyTab: React.FC = () => {
                     onClick={() => {
                       handleChange('main_color', preset.main);
                       handleChange('sub_color', preset.sub);
+                      handleChange('hero_bg_color', preset.hero);
                     }}
                     className="p-3 border-2 border-gray-200 rounded-lg hover:border-primary transition-colors group"
                   >
-                    <div className="flex space-x-2 mb-2">
+                    <div className="flex space-x-1 mb-2">
                       <div 
-                        className="w-8 h-8 rounded"
+                        className="w-6 h-8 rounded"
                         style={{ backgroundColor: preset.main }}
+                        title={t('メイン', '主色')}
                       />
                       <div 
-                        className="w-8 h-8 rounded"
+                        className="w-6 h-8 rounded"
                         style={{ backgroundColor: preset.sub }}
+                        title={t('サブ', '副色')}
+                      />
+                      <div 
+                        className="w-6 h-8 rounded"
+                        style={{ backgroundColor: preset.hero }}
+                        title={t('背景', '背景')}
                       />
                     </div>
                     <p className="text-xs text-gray-600 group-hover:text-primary">
@@ -695,6 +729,9 @@ export const CompanyTab: React.FC = () => {
                   </button>
                 ))}
               </div>
+              <p className="text-xs text-gray-500 mt-2">
+                {t('※プリセットを選択すると、メインカラー、サブカラー、ヒーロー背景色が一括設定されます', '※选择预设后，将一次性设置主色、副色、英雄背景色')}
+              </p>
             </div>
 
             {/* プレビュー */}
@@ -705,40 +742,61 @@ export const CompanyTab: React.FC = () => {
                   {t('カラープレビュー', '颜色预览')}
                 </label>
               </div>
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <div className="space-y-3">
-                  <button
-                    type="button"
-                    className="px-6 py-3 rounded-lg text-white font-medium transition-colors"
-                    style={{ backgroundColor: data.main_color || '#f59e0b' }}
-                  >
-                    {t('メインボタン', '主按钮')}
-                  </button>
-                  <button
-                    type="button"
-                    className="px-6 py-3 rounded-lg text-white font-medium transition-colors"
-                    style={{ backgroundColor: data.sub_color || '#0ea5e9' }}
-                  >
-                    {t('サブボタン', '副按钮')}
-                  </button>
-                  <div className="flex items-center space-x-4 text-sm">
-                    <a 
-                      href="#" 
-                      className="font-medium hover:underline"
-                      style={{ color: data.main_color || '#f59e0b' }}
-                      onClick={(e) => e.preventDefault()}
+              <div className="space-y-4">
+                {/* ボタンとリンクのプレビュー */}
+                <div className="bg-white rounded-lg p-6 border border-gray-200">
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      className="px-6 py-3 rounded-lg text-white font-medium transition-colors"
+                      style={{ backgroundColor: data.main_color || '#f59e0b' }}
                     >
-                      {t('リンクテキスト', '链接文本')}
-                    </a>
-                    <span className="text-gray-400">|</span>
-                    <a 
-                      href="#" 
-                      className="font-medium hover:underline"
-                      style={{ color: data.sub_color || '#0ea5e9' }}
-                      onClick={(e) => e.preventDefault()}
+                      {t('メインボタン', '主按钮')}
+                    </button>
+                    <button
+                      type="button"
+                      className="px-6 py-3 rounded-lg text-white font-medium transition-colors"
+                      style={{ backgroundColor: data.sub_color || '#0ea5e9' }}
                     >
-                      {t('サブリンク', '副链接')}
-                    </a>
+                      {t('サブボタン', '副按钮')}
+                    </button>
+                    <div className="flex items-center space-x-4 text-sm">
+                      <a 
+                        href="#" 
+                        className="font-medium hover:underline"
+                        style={{ color: data.main_color || '#f59e0b' }}
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        {t('リンクテキスト', '链接文本')}
+                      </a>
+                      <span className="text-gray-400">|</span>
+                      <a 
+                        href="#" 
+                        className="font-medium hover:underline"
+                        style={{ color: data.sub_color || '#0ea5e9' }}
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        {t('サブリンク', '副链接')}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ヒーロー背景のプレビュー */}
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <p className="text-xs font-semibold text-gray-600 mb-2">
+                    {t('ヒーロー背景プレビュー（実際は円形グラデーション効果が適用されます）', '英雄背景预览（实际会应用圆形渐变效果）')}
+                  </p>
+                  <div 
+                    className="h-24 rounded-lg flex items-center justify-center"
+                    style={{ 
+                      backgroundColor: data.hero_bg_color || '#8b5cf6',
+                      opacity: 0.3
+                    }}
+                  >
+                    <span className="text-sm font-medium text-gray-700 bg-white/80 px-4 py-2 rounded">
+                      {t('ヒーローセクション背景', '英雄区域背景')}
+                    </span>
                   </div>
                 </div>
               </div>
