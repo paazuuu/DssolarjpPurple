@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Sun, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCompanyInfo } from '../hooks/useCompanyInfo';
@@ -20,13 +20,104 @@ export const Hero: React.FC = () => {
   // hero_icon_urlがなければbrowser_favicon_urlを使用、それもなければデフォルトの/sun-icon.svgを使用
   const iconUrl = company?.hero_icon_url || company?.browser_favicon_url || '/sun-icon.svg';
 
+  // 背景色のグラデーションを動的に生成
+  const gradientColors = useMemo(() => {
+    const baseColor = company?.hero_bg_color || '#8b5cf6'; // デフォルトは紫色
+    
+    // HEXカラーをRGBに変換
+    const hexToRgb = (hex: string): { r: number; g: number; b: number } | null => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    };
+
+    // RGBからHSLに変換
+    const rgbToHsl = (r: number, g: number, b: number): { h: number; s: number; l: number } => {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h = 0, s = 0;
+      const l = (max + min) / 2;
+
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+      return { h: h * 360, s: s * 100, l: l * 100 };
+    };
+
+    // HSLからHEXに変換
+    const hslToHex = (h: number, s: number, l: number): string => {
+      l /= 100;
+      const a = s * Math.min(l, 1 - l) / 100;
+      const f = (n: number) => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+      };
+      return `#${f(0)}${f(8)}${f(4)}`;
+    };
+
+    const rgb = hexToRgb(baseColor);
+    if (!rgb) return {
+      bg: 'from-indigo-50 via-purple-50 to-blue-50',
+      blob1: '#c7d2fe',
+      blob2: '#ddd6fe',
+      blob3: '#bfdbfe'
+    };
+
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+    // グラデーション用の3色を生成
+    // 1. メインカラーより明るく薄い色（背景グラデーションの開始色）
+    const color1Hsl = { h: hsl.h, s: Math.max(20, hsl.s - 30), l: Math.min(95, hsl.l + 40) };
+    // 2. メインカラーより少し明るい色（背景グラデーションの中間色）
+    const color2Hsl = { h: (hsl.h + 10) % 360, s: Math.max(25, hsl.s - 20), l: Math.min(92, hsl.l + 35) };
+    // 3. メインカラーの補色系（背景グラデーションの終了色）
+    const color3Hsl = { h: (hsl.h + 180) % 360, s: Math.max(20, hsl.s - 30), l: Math.min(93, hsl.l + 38) };
+
+    // ブロブ用の色を生成（より濃い色）
+    const blob1Hsl = { h: hsl.h, s: Math.max(40, hsl.s - 10), l: Math.min(85, hsl.l + 20) };
+    const blob2Hsl = { h: (hsl.h + 15) % 360, s: Math.max(45, hsl.s - 5), l: Math.min(83, hsl.l + 18) };
+    const blob3Hsl = { h: (hsl.h - 15 + 360) % 360, s: Math.max(40, hsl.s - 10), l: Math.min(86, hsl.l + 22) };
+
+    return {
+      bg: `linear-gradient(to bottom right, ${hslToHex(color1Hsl.h, color1Hsl.s, color1Hsl.l)}, ${hslToHex(color2Hsl.h, color2Hsl.s, color2Hsl.l)}, ${hslToHex(color3Hsl.h, color3Hsl.s, color3Hsl.l)})`,
+      blob1: hslToHex(blob1Hsl.h, blob1Hsl.s, blob1Hsl.l),
+      blob2: hslToHex(blob2Hsl.h, blob2Hsl.s, blob2Hsl.l),
+      blob3: hslToHex(blob3Hsl.h, blob3Hsl.s, blob3Hsl.l)
+    };
+  }, [company?.hero_bg_color]);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 pt-16">
+    <section 
+      className="relative min-h-screen flex items-center justify-center pt-16"
+      style={{ background: gradientColors.bg }}
+    >
       {/* 背景装飾 */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-        <div className="absolute top-40 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+        <div 
+          className="absolute top-20 right-10 w-64 h-64 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
+          style={{ backgroundColor: gradientColors.blob1 }}
+        ></div>
+        <div 
+          className="absolute top-40 left-10 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"
+          style={{ backgroundColor: gradientColors.blob2 }}
+        ></div>
+        <div 
+          className="absolute -bottom-8 left-1/2 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"
+          style={{ backgroundColor: gradientColors.blob3 }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
